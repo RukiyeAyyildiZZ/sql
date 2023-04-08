@@ -161,7 +161,59 @@ select * from malzemeler;
 --Soru 1: Malzemeler tablosundaki musteri_isim'i 'Ali Can' olanın malzeme_isim'ini,
 --toptancilar  tablosunda irtibat_ismi 'Adem Coş' olan sirket_ismi ile güncelleyiniz.
 
+update malzemeler set malezeme_isim=('Apple') where musteri_isim='Ali Can';
 
+--cevabi daha dinamik hale getirelim
+
+update malzemeler set malzeme_isim=(select sirket_ismi from toptancilar where irtibat_ismi='Adem Coş')
+where musteri_isim='Ali Can';
+
+() ==> select sirket_ismi from toptancilar where irtibat_ismi='Adem Coş'
+
+--Soru 2: Malzemeler tablosundaki malzeme_isim'i 'Laptop' olan musteri_isim'lerini,
+ -- toptancilar  tablosunda sirket_ismi 'Apple' in irtibat_ismi ile güncelleyiniz.
+
+update malzemeler set musteri_isim=('Adem Coş') where malzeme_isim='Laptop';
+
+--cevabi daha dinamik hale getirelim
+()==>select irtibat_ismi  from toptancilar  where sirket_ismi='Apple'
+
+update malzemeler set musteri_isim=(select irtibat_ismi  from toptancilar  where sirket_ismi='Apple') 
+where malzeme_isim='Laptop';
+
+select * from malzemeler;
+
+
+/*================================ ORDER BY  ===================================
+   ORDER BY komutu bir SORGU deyimi içerisinde belli bir SUTUN’a göre 
+   SIRALAMA yapmak için kullanılır.
+   
+   Syntax
+   -------
+    ORDER BY sutun_adı              İNT==>KÜÇÜKTEN BÜYÜGE  STRİNG==>A-Z
+    ORDER BY sutun_adı DESC         İNT==>BÜYÜKTEN KÜÇÜGE  STRİNG==>Z-A
+==============================================================================*/   
+CREATE TABLE meslekler(
+
+id int PRIMARY KEY,
+isim VARCHAR(50), 
+soyisim VARCHAR(50),
+meslek CHAR(9),
+maas int
+);
+        
+INSERT INTO meslekler VALUES(1, 'Ali', 'Can', 'Doktor', '20000' );
+INSERT INTO meslekler VALUES(2, 'Veli', 'Cem', 'Mühendis', '18000');
+INSERT INTO meslekler VALUES(3, 'Mine', 'Bulut', 'Avukat', '17000');
+INSERT INTO meslekler VALUES(4, 'Mahmut', 'Bulut', 'Ögretmen', '15000');
+INSERT INTO meslekler VALUES (5, 'Mine', 'Yasa', 'Teknisyen', '13000');
+INSERT INTO meslekler VALUES (6, 'Veli', 'Yilmaz', 'Hemşire', '12000');
+INSERT INTO meslekler VALUES(7, 'Ali', 'Kan', 'Marangoz', '10000' );
+INSERT INTO meslekler VALUES(8, 'Veli', 'Cem', 'Tekniker', '14000');
+
+select * from meslekler;
+
+--Soru 1: meslekler tablosunu isim'e gore kucukten buyuge siralayarak listeleyiniz
 
 
 
